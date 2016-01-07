@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>L3: Exercise 1</title>
+  <style>
+
+    .chart div {
+      width: 45%;
+      margin: 0 auto;
+      font: 10px sans-serif;
+      background-color: steelblue;
+      text-align: right;
+      padding: 3px;
+      margin: 1px;
+      color: white;
+    }
+    .chart div:hover {
+      background: brown;
+    }
+    .chart text.name {
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #000;
+      font-size: 14px;
+    }
+
+  </style>
+  <link rel="stylesheet" href="style.css">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <h1>Layer 3 Code Challenge - Exercise 1</h1>
+  <div class="chart"></div>
+  <div class="chart2"></div>
+  <div id="chart"></div>
+<!--<script src="app.js"></script>-->
+  <!--<script src="d3.min.v3.js"></script>-->
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script>
+
+    var exampleSet = [ { "id": "txnbq", "end": 92, "start": 52 }, { "id": "anabw", "end": 65, "start": 39 }, { "id": "ysqks", "end": 70, "start": 11 }, { "id": "phxja", "end": 68, "start": 30 }, { "id": "pkddd", "end": 23, "start": 1 }, { "id": "avtpe", "end": 63, "start": 40 }, { "id": "wxisw", "end": 91, "start": 51 }, { "id": "odnxu", "end": 95, "start": 3 }, { "id": "oyiyd", "end": 16, "start": 12 }, { "id": "xwovf", "end": 76, "start": 75 }, { "id": "bkkzn", "end": 68, "start": 26 }, { "id": "puraf", "end": 41, "start": 16 }, { "id": "mbisb", "end": 37, "start": 1 }, { "id": "pdszz", "end": 54, "start": 31 }, { "id": "jfarx", "end": 78, "start": 24 }, { "id": "hkiad", "end": 68, "start": 43 }, { "id": "zwfnc", "end": 90, "start": 53 }, { "id": "lxyvo", "end": 31, "start": 17 }, { "id": "ljajf", "end": 79, "start": 35 }, { "id": "pwmva", "end": 67, "start": 38 }, { "id": "wpnrf", "end": 88, "start": 76 }, { "id": "mnllf", "end": 90, "start": 65 }, { "id": "fgvvx", "end": 76, "start": 42 }, { "id": "vyklv", "end": 39, "start": 32 }, { "id": "japau", "end": 44, "start": 7 }, { "id": "ldjtg", "end": 96, "start": 68 }, { "id": "duaty", "end": 29, "start": 23 }, { "id": "xvbpw", "end": 95, "start": 28 }, { "id": "pleyz", "end": 72, "start": 26 }, { "id": "ootfh", "end": 97, "start": 66 }, { "id": "hbgjs", "end": 64, "start": 39 }, { "id": "dwydg", "end": 55, "start": 52 }, { "id": "mzkcq", "end": 66, "start": 5 }, { "id": "qjqkl", "end": 65, "start": 22 }, { "id": "mvphw", "end": 36, "start": 27 }, { "id": "ugwbn", "end": 99, "start": 1 }, { "id": "kyfov", "end": 81, "start": 74 }, { "id": "iyiau", "end": 80, "start": 48 }, { "id": "tdyyj", "end": 82, "start": 52 }, { "id": "nqsqn", "end": 91, "start": 70 }, { "id": "dqpab", "end": 57, "start": 0 }, { "id": "ilxph", "end": 54, "start": 43 }, { "id": "cyhch", "end": 77, "start": 52 }, { "id": "knzxb", "end": 16, "start": 3 }, { "id": "ifgca", "end": 26, "start": 6 }, { "id": "ugoow", "end": 95, "start": 50 }, { "id": "thzuh", "end": 89, "start": 16 }, { "id": "awldx", "end": 43, "start": 20 }, { "id": "lysyi", "end": 91, "start": 87 }, { "id": "ielke", "end": 87, "start": 18 } ];
+
+
+    // Given m=2 and t=4, your function should return ['a','b','c’]
+
+    var times = function(arr, t, m) {
+      var results = [];
+      var temp = [];
+
+      for (var i = 0; i < arr.length; i++) {
+
+        var start = arr[i]["start"];
+        var num = [];
+        var end = arr[i]["end"];
+
+        while (start < end + 1) {
+          num.push(start++);
+        }
+
+        for (var j = 0; j < num.length; j++) {
+
+          if (num[j] === t) {
+            var id = arr[i]["id"];
+            var last = arr[i]["end"];
+            results.push(id);
+            temp.push(last);
+            break;
+          }
+        }
+      }
+
+      if (results.length >= m) {
+
+        var data = temp;
+        var names = results;
+        console.log('names', names);
+       chart.innerHTML = results;
+
+        var x = d3.scale.linear()
+                .domain([0, d3.max(data)])
+                .range([0, 420]);
+
+        d3.select(".chart")
+                .selectAll("div")
+                .data(data)
+                .enter().append("div")
+                .style("width", function(d) { return x(d) + "px"; })
+                .text(function(d) { return d; });
+
+        return [results, temp];
+      }
+      else results = [];
+      chart.innerHTML = "Sorry Charlie, nothing here";
+      return [results, temp];
+    };
+
+    times(exampleSet, 4, 3);
+
+  </script>
+</body>
+</html>

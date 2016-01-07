@@ -1,0 +1,23 @@
+body {
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  background: rgba(0,0,0,.6);
+  width: 50%;
+  margin: 10px auto;
+  padding: 5px;
+}
+#chart{
+  margin: 0 auto;
+  color: steelblue;
+  width: 30%;
+  text-align: center;
+  padding: 20px;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
